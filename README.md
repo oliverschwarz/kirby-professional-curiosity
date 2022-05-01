@@ -10,6 +10,10 @@ A personal website around being curious built on the great cms Kirby. This repos
 1. Design a general layout and select a color palette
 1. Decide what to do with the Podcast / Create a podcast element in Kirby
 
+* Festgelegte Formate für Grafiken (in der Übersichtsleiste)
+* Themenliste ist wichtig, Monatsübersicht aber nicht so
+* RSS-Feed
+
 ## Assets
 
 ### Colour palette

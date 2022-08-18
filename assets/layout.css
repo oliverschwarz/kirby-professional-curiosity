@@ -44,7 +44,7 @@ header {
 
 header h1 {
     margin: 0;
-    padding: 3rem 0 2rem;
+    padding: 3rem 0 1rem;
 }
 
 header nav ul,
@@ -56,11 +56,24 @@ header nav li {
 
 header nav li {
     display: inline-grid;
-    padding-right: .5rem;
+    padding-right: 1rem;
+    font-size: 1rem;
+}
+
+header a:link, header a:visited {
+    border-radius: .4rem;
+    padding: .1rem .25rem;
+    text-decoration: none;
+}
+
+header a:hover {
+    background-color: var(--color-lightgreen);
+    color: var(--color-blue);
 }
 
 main h1 {
     line-height: 3.5rem;
+    color: var(--color-blue);
 }
 
 /*! custom structures */
@@ -68,23 +81,6 @@ main h1 {
     margin: 0 auto;
     max-width: 90rem;
     padding: 0 1.5rem;
-}
-
-#news {
-    border-top: .1rem solid var(--color-lightgreen);
-}
-
-#news .feature {
-    display: inline-grid;
-    justify-content: stretch;
-    width: 45%;
-}
-
-.feature h2 {
-    color: var(--color-lightgreen);
-    font-family: Georgia, serif;
-    font-size: 1rem;
-    font-weight: normal;
 }
 
 @media screen and (min-width: 32em) { body, html { font-size: 1.3rem; } }

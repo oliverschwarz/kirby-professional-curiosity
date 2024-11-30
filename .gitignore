@@ -28,6 +28,7 @@ Icon
 /site/accounts/
 /site/sessions/
 /site/config/
+/site/plugins/
 
 # Content
 # ---------------

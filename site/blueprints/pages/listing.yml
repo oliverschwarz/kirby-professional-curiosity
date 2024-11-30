@@ -1,0 +1,35 @@
+title: Listing
+icon: 🎙️
+
+columns:
+  - width: 1/3
+    sections:
+      drafts:
+        type: pages
+        label: Drafts
+        status: draft
+        sortBy: date desc
+        create:
+          - listing
+          - episode
+          - podcasterfeed
+
+      unlisted:
+        type: pages
+        label: Unlisted
+        status: unlisted
+        sortBy: date desc
+      
+  - width: 2/3
+    sections:
+      listed:
+        type: pages
+        label: Published
+        status: listed
+        sortBy: date desc
+
+  - width: 1/3
+    sections:
+      files:
+        type: files
+        label: Media

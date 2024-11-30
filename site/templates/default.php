@@ -3,40 +3,56 @@
 use mauricerenck\Podcaster\Podcast;
 $rssPage = page('podcast/feed');
 $podcastHelper = new Podcast();
-$episodeList = $podcastHelper->getEpisodes($rssPage);
+$episodes = $podcastHelper->getEpisodes($rssPage);
 
 snippet('header'); ?>
 
-<main>
-    <div class="stage">
-        <!--
-            <h1><?php echo $page->title(); ?></h1>
-        -->
-        <?php echo $page->text()->kt(); ?>
+<main class="main-content">
+    <?php
 
-    </div><!-- /.stage -->
-
-
-<?php if (count($episodeList)): ?>
-    <div class="stage">
-<?php foreach($episodeList as $episode): ?>
-        <div class="episode">
-            <h3><a href="<?php echo $episode->url(); ?>"><?php echo $episode->title()->html(); ?></a></h3>
-            <p class="metadata">
-            <time datetime="<?php echo $episode->date()->toDate('c'); ?>" pubdate><?php echo $episode->date()->toDate('d.m.y'); ?></time> - Folge <?php echo $episode->podcasterepisode(); ?> - <?php echo $episode->podcasterSubtitle(); ?>
-            </p>
+    if($episodes->count() > 0):
+        $latestEpisode = $episodes->first();
+    ?>
+    <article class="episode-featured">
+        <a href="<?= $page->url() ?>/episode/<?= $latestEpisode->uid() ?>" class="episode-link">
+            <h1 class="episode-title"><?= $latestEpisode->title()->html() ?></h1>
+            <div class="episode-meta">Episode <?php echo $latestEpisode->podcasterepisode(); ?> / <?= $latestEpisode->date()->toDate('F j, Y') ?></div>
+        </a>
+        <div class="player">
+            <?php snippet('player', ['episode' => $latestEpisode]) ?>
         </div>
-<?php endforeach; ?>
-        </ul>
-    </div>
-<?php endif; ?>
-
+        <div class="episode-description">
+            <?= $latestEpisode->description()->excerpt(300) ?>
+            <a href="<?= $page->url() ?>/episode/<?= $latestEpisode->uid() ?>">Read more →</a>
+        </div>
+    </article>
+    <?php endif ?>
+    <?php if($episodes->count() > 1): ?>
+    <section class="episode-list">
+        <h2>All Episodes</h2>
+        <?php foreach($episodes->offset(1) as $episode): ?>
+        <article class="episode-item">
+            <a href="<?= $page->url() ?>/episode/<?= $episode->uid() ?>" class="episode-link">
+                <h3 class="episode-title"><?= $episode->title()->html() ?></h3>
+                <div class="episode-meta">Episode <?php echo $episode->podcasterepisode(); ?> / <?= $episode->date()->toDate('F j, Y') ?></div>
+                <div class="episode-description">
+                    <?php echo $episode->podcasterSubtitle(); ?>
+                </div>
+            </a>
+        </article>
+        <?php endforeach ?>
+    </section>
+    <?php endif ?>
 </main>
 
-<footer>
-    <div class="stage">
-        <hr>
-        <?php echo $page->footer()->kt(); ?>
+<footer class="download-section">
+    <div class="download-links">
+        <a href="<?= $site->apple_podcasts_url() ?>" class="download-button">Listen on Apple Podcasts</a>
+        <a href="<?= $site->spotify_url() ?>" class="download-button">Listen on Spotify</a>
+    </div>
+    <div class="creator-links">
+        Created by <a href="<?= $site->creator1_url() ?>"><?= $site->creator1_name() ?></a> &
+        <a href="<?= $site->creator2_url() ?>"><?= $site->creator2_name() ?></a>
     </div>
 </footer>
 
